@@ -1,4 +1,4 @@
-@import "~antd/dist/antd.css";
+@import "~antd/dist/reset.css";
 @import "TopBar.css";
 @import "Main.css";
 @import "Register.css";
@@ -9,4 +9,3 @@
 .App {
   text-align: center;
 }
-

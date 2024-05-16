@@ -1,32 +1,36 @@
-import React, {Component} from 'react';
-import { Register } from './Register';
-import { Switch, Route, Redirect } from 'react-router-dom';
-import  Login  from './Login';
-import Home from './Home';
+import React, { Component } from "react";
+import { Routes, Route, Navigate } from "react-router-dom";
+import Login from "./Login";
+import Home from "./Home";
+import { Register } from "./Register";
 
 class Main extends Component {
-    getLogin = () => {
-        return this.props.isLoggedIn ? <Redirect to="/home"/> : <Login handleLoginSucceed={this.props.handleLoginSucceed}/>;
-    }
+  getLogin = () => {
+    return this.props.isLoggedIn ? (
+      <Navigate to="/home" />
+    ) : (
+      <Login handleLoginSucceed={this.props.handleLoginSucceed} />
+    );
+  };
 
-    getHome = () => {
-        return this.props.isLoggedIn ? <Home/> : <Redirect to="/login"/>;
-    }
+  getHome = () => {
+    return this.props.isLoggedIn ? <Home /> : <Navigate to="/login" />;
+  };
 
-    render() {
-        return (
-            <div className="main">
-                <Switch>
-                    <Route path="/login" render={this.getLogin}/>
-                    <Route path="/register" component={Register}/>
-                    <Route path="/home" render={this.getHome}/>
+  render() {
+    return (
+      <div className="main">
+        <Routes>
+          <Route path="/" element={this.getHome()} />
+          <Route path="/login" element={this.getLogin()} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/home" element={this.getHome()} />
 
-                    <Route render={this.getLogin}/>
-                </Switch>
-
-            </div>
-        );
-    }
+          <Route element={this.getLogin} />
+        </Routes>
+      </div>
+    );
+  }
 }
 
 export default Main;
