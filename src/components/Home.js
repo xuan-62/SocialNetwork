@@ -17,7 +17,6 @@ import Gallery from './Gallery';
 import CreatePostButton from './CreatePostButton';
 import AroundMap from './AroundMap';
 
-const {TabPane} = Tabs;
 
 class Home extends React.Component {
     state = {
@@ -90,10 +89,9 @@ class Home extends React.Component {
                 return {
                     user: post.user,
                     src: post.url,
-                    thumbnail: post.url,
                     caption: post.message,
-                    thumbnailWidth: 400,
-                    thumbnailHeight: 300,
+                    width: 400,
+                    height: 300,
                 };
             });
         return <Gallery images={images}/>
@@ -186,24 +184,32 @@ class Home extends React.Component {
                     <Radio value={TOPIC_AROUND}>Posts Around Me</Radio>
                     <Radio value={TOPIC_FACE}>Faces Around The World</Radio>
                 </Radio.Group>
-                <Tabs tabBarExtraContent={operations} className="main-tabs">
-                    <TabPane tab="Image Posts" key="1">
-                        {this.renderPosts(POST_TYPE_IMAGE)}
-                    </TabPane>
-                    <TabPane tab="Video Posts" key="2">
-                        {this.renderPosts(POST_TYPE_VIDEO)}
-                    </TabPane>
-                    <TabPane tab="Map" key="3">
-                        <AroundMap
-                            googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyD3CEh9DXuyjozqptVB5LA-dN7MxWWkr9s&v=3.exp&libraries=geometry,drawing,places"
-                            loadingElement={<div style={{ height: `100%` }} />}
-                            containerElement={<div style={{ height: `600px` }} />}
-                            mapElement={<div style={{ height: `100%` }} />}
-                            posts={this.state.posts}
-                            loadPostsByTopic={this.loadPostsByTopic}
-                        />
-                    </TabPane>
-                </Tabs>
+                <Tabs
+                    tabBarExtraContent={operations}
+                    className="main-tabs"
+                    items={[
+                        {
+                            key: '1',
+                            label: 'Image Posts',
+                            children: this.renderPosts(POST_TYPE_IMAGE),
+                        },
+                        {
+                            key: '2',
+                            label: 'Video Posts',
+                            children: this.renderPosts(POST_TYPE_VIDEO),
+                        },
+                        {
+                            key: '3',
+                            label: 'Map',
+                            children: (
+                                <AroundMap
+                                    posts={this.state.posts}
+                                    loadPostsByTopic={this.loadPostsByTopic}
+                                />
+                            ),
+                        },
+                    ]}
+                />
             </div>
         );
     }

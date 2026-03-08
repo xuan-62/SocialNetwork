@@ -26,7 +26,7 @@ class Main extends Component {
           <Route path="/register" element={<Register />} />
           <Route path="/home" element={this.getHome()} />
 
-          <Route element={this.getLogin} />
+          <Route path="*" element={this.getLogin()} />
         </Routes>
       </div>
     );
