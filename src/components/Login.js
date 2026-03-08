@@ -22,7 +22,7 @@ class NormalLoginForm extends Component {
             if (response.ok) {
               return response.text();
             }
-            throw new Error(response.stateText);
+            throw new Error(response.statusText);
           })
           .then((data) => {
             console.log(data);
