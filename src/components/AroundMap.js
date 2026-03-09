@@ -2,6 +2,9 @@ import React, { Component } from "react";
 import { POS_KEY } from "../constants";
 
 import { GoogleMap, useJsApiLoader } from "@react-google-maps/api";
+import AroundMarker from "./AroundMarker";
+
+const MAP_CONTAINER_STYLE = { height: "600px", width: "100%" };
 
 class NormalAroundMap extends Component {
   getMapRef = (mapInstance) => {
@@ -41,11 +44,16 @@ class NormalAroundMap extends Component {
     return (
       <GoogleMap
         onLoad={this.getMapRef}
-        defaultZoom={11}
-        defaultCenter={{ lat, lng: lon }}
+        zoom={11}
+        center={{ lat, lng: lon }}
         onDragEnd={this.reloadMarker}
         onZoomChanged={this.reloadMarker}
-      ></GoogleMap>
+        mapContainerStyle={MAP_CONTAINER_STYLE}
+      >
+        {this.props.posts.map((post) => (
+          <AroundMarker key={post.url} post={post} />
+        ))}
+      </GoogleMap>
     );
   }
 }

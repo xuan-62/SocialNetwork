@@ -8,10 +8,9 @@ class Gallery extends Component {
             PropTypes.shape({
                 user: PropTypes.string.isRequired,
                 src: PropTypes.string.isRequired,
-                thumbnail: PropTypes.string.isRequired,
                 caption: PropTypes.string,
-                thumbnailWidth: PropTypes.number.isRequired,
-                thumbnailHeight: PropTypes.number.isRequired
+                width: PropTypes.number.isRequired,
+                height: PropTypes.number.isRequired
             })
         ).isRequired
     }

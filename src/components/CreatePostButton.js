@@ -80,7 +80,7 @@ class CreatePostButton extends Component {
                 </Button>
                 <Modal
                     title="Create New Post"
-                    visible={visible}
+                    open={visible}
                     onOk={this.handleOk}
                     okText='Create'
                     confirmLoading={confirmLoading}
